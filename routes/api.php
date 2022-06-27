@@ -20,6 +20,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware'=>'api','prefix'=>'auth'],function ($router){
     Route::post('/register',[AuthController::class,'register']);
     Route::post('/login',[AuthController::class,'login']);
-    Route::get('/profile',[AuthController::class,'profile']);
     Route::post('/logout',[AuthController::class,'logout']);
+    Route::post('/edit',[AuthController::class,'edit']);
+    Route::get('/profiles',[AuthController::class,'profiles']);
+    Route::get('/profile/{profileId}',[AuthController::class,'profile']);
+    Route::get('/followersNb/{userId}',[AuthController::class,'followersNb']);
+    Route::get('/followers/{userId}',[AuthController::class,'followers']);
+    Route::get('/amIfollowing/{profileId}',[AuthController::class,'amIfollowing']);
+    Route::post('/follows/{profileId}' , [AuthController::class,'store']);
+
 });

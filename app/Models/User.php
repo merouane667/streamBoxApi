@@ -52,4 +52,21 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+    public function profile()
+    {
+        return $this->hasOne(Profile::class,'user_id');
+    }
+    public function following()
+    {
+        return $this->belongsToMany('App\Models\Profile');
+
+    }
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'profile_user', 'profile_id', 'user_id')->withTimestamps();
+    }
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'profile_user', 'user_id', 'profile_id')->withTimestamps();
+    }
 }
